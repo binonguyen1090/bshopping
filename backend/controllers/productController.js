@@ -11,8 +11,6 @@ export const getProducts = async (req,res) => {
 }
 
 
-
-
 export const newProduct = async (req,res) => {
     
     
@@ -24,6 +22,19 @@ export const newProduct = async (req,res) => {
 }
 
 
+export const getProductDetail = async (req,res) => {
+    
+    
+    const product = await Product.findById(req?.params?.id)
+    if(!product){
+        return  res.status(404).json({
+            error: "Product not found",
+        })
+    }
+    res.status(200).json({
+        product
+    })
+}
 
 
 
