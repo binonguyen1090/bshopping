@@ -7,7 +7,7 @@ import APIFilters from "../utils/apiFilter.js"
 
 export const getProducts = catchAsyncErrors(async (req,res) => {
 
-
+    const resPerPage = 2;
 
     const apiFilter = new APIFilters(Product,req.query).search().filters()
 
@@ -15,8 +15,11 @@ export const getProducts = catchAsyncErrors(async (req,res) => {
     let productsLength = products.length
     // const products = await Product.find()
 
+    apiFilter.pagination(resPerPage)
+    products = await apiFilter.query.clone()
 
     res.status(200).json({
+        resPerPage,
         productsLength,
         products,
     })
