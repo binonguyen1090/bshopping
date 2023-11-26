@@ -9,7 +9,7 @@ export const getProducts = catchAsyncErrors(async (req,res) => {
 
 
 
-    const apiFilter = new APIFilters(Product,req.query).search()
+    const apiFilter = new APIFilters(Product,req.query).search().filters()
 
     let products = await apiFilter.query
     let productsLength = products.length
