@@ -24,8 +24,10 @@ connectDatabase();
 app.use(express.json())
 // import routes
 import productRoutes from './routes/products.js'
+import authRoutes from './routes/auth.js'
 
 app.use('/api/v1', productRoutes)
+app.use('/api/v1', authRoutes)
 app.use( errorMiddleware)
 
 const server = app.listen(process.env.PORT,()=>{
