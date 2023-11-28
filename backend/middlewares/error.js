@@ -18,6 +18,13 @@ export default (err, req, res, next) => {
     error = new ErrorHandler(message, 400);
   }
 
+
+    // Handle existing email Error
+    if (err.code === 11000) {
+      const message = `Duplicate ${Object.keys(err.keyValue)}`;
+      error = new ErrorHandler(message, 404);
+    }
+
   if (process.env.NODE_ENV === "DEVELOPMENT") {
     res.status(error.statusCode).json({
       message: error.message,
