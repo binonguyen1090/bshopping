@@ -7,6 +7,7 @@ import APIFilters from "../utils/apiFilter.js"
 
 export const getProducts = catchAsyncErrors(async (req,res) => {
 
+    console.log(req.user)
     const resPerPage = 2;
 
     const apiFilter = new APIFilters(Product,req.query).search().filters()
