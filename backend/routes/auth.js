@@ -1,9 +1,9 @@
 
 
 import express from 'express'
-import {  getUserProfile,forgotPassword, loginUser, 
-    logoutUser, registerUser, resetPassword, updatePassword,
- updateProfile,getAllUsers,getUserDetails} from '../controllers/authController.js';
+import {  getUserProfile,forgotPassword, loginUser, logoutUser, 
+    registerUser, resetPassword, updatePassword,updateProfile,
+    getAllUsers,getUserDetails,updateUserProfile,deleteUserProfile} from '../controllers/authController.js';
 import { authorizeRoles, isAuthenticatedUser } from '../middlewares/auth.js';
 
 const router = express.Router();
@@ -24,5 +24,7 @@ router.route("/profile/update").get( isAuthenticatedUser,updateProfile);
 
 router.route("/admin/users").get( isAuthenticatedUser, authorizeRoles("admin") ,getAllUsers);
 router.route("/admin/users/:id").get( isAuthenticatedUser,authorizeRoles("admin"),getUserDetails);
+router.route("/admin/users/:id").put( isAuthenticatedUser,authorizeRoles("admin"),updateUserProfile);
+router.route("/admin/users/:id").delete( isAuthenticatedUser,authorizeRoles("admin"),deleteUserProfile);
 
 export default router;

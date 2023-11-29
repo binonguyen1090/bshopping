@@ -190,3 +190,31 @@ export const getUserDetails = catchAsyncErrors(async(req,res,next) =>{
         user
       });
 })
+
+
+export const updateUserProfile = catchAsyncErrors(async(req,res,next) =>{
+    
+
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
+    }
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {new:true})
+
+    res.status(200).json({
+        user
+      });
+})
+
+
+export const deleteUserProfile = catchAsyncErrors(async(req,res,next) =>{
+    const user = await User.findById(req.params.id)
+    if(!user) {
+        return next(new ErrorHandler('user is not found', 404));
+    }
+    await user.deleteOne()
+    res.status(200).json({
+        success: true
+      });
+})
