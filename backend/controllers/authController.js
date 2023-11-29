@@ -169,3 +169,24 @@ export const updateProfile = catchAsyncErrors(async(req,res,next) =>{
         user
       });
 })
+
+
+export const getAllUsers = catchAsyncErrors(async(req,res,next) =>{
+    
+    const users = await User.find()
+
+    res.status(200).json({
+        users
+      });
+})
+
+
+export const getUserDetails = catchAsyncErrors(async(req,res,next) =>{
+    const user = await User.findById(req.params.id)
+    if(!user) {
+        return next(new ErrorHandler('user is not found', 404));
+    }
+    res.status(200).json({
+        user
+      });
+})
