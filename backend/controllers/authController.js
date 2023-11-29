@@ -128,3 +128,13 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
     console.log(res)
     sendToken(user, 200, res);
   });
+
+
+
+export const getUserProfile = catchAsyncErrors(async(req,res,next) =>{
+    const user = await User.findById(req?.user?._id)
+
+    res.status(200).json({
+        user
+      });
+})
