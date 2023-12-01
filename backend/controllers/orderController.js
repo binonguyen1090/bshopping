@@ -107,3 +107,22 @@ export const updateOrder = catchAsyncErrors(async (req,res,next) => {
         success: true
     })
 })
+
+
+export const deleteOrder = catchAsyncErrors(async (req,res) => {
+    
+    
+    const order = await Order.findById(req?.params?.id)
+    if(!order){
+        return  res.status(404).json({
+            error: "Order not found",
+        })
+    }
+
+    await order.deleteOne()
+    res.status(200).json({
+        message: "Order is deleted",
+    })
+})
+
+
