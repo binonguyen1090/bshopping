@@ -1,6 +1,6 @@
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
-
+import toast, { Toaster } from 'react-hot-toast';
 import Home from "./components/Home";
 import './App.css'
 
@@ -10,6 +10,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <Toaster position="top-center"/>
         <Header />
         <div className="container">
           <Routes>
