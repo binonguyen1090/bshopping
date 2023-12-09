@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 const Home = () => {
 
   const {data,isLoading,error} = useGetProductsQuery()
+  
   useEffect(()=>{
     if(error){
       toast.error(error?.data?.message)
