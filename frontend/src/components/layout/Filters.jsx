@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { getPriceQueryParams } from '../../helpers/helpers'
 import { PRODUCT_CATEGORIES } from '../../constants/constants'
+import StarRatings from 'react-star-ratings';
+
 const Filters = () => {
 
     const [min, setMin] = useState(0)
@@ -122,30 +124,31 @@ const Filters = () => {
       <hr />
       <h5 className="mb-3">Ratings</h5>
 
-      <div className="form-check">
+
+        {[1,2,3,4,5].map((r) => (
+            <div className="form-check">
         <input
           className="form-check-input"
           type="checkbox"
           name="ratings"
           id="check7"
-          value="5"
+          value={r}
+          defaultChecked={defaultCheckHandler("ratings", r?.toString())}
+          onClick={(e) => handleClick(e.target)}
         />
         <label className="form-check-label" for="check7">
-          <span className="star-rating">★ ★ ★ ★ ★</span>
+        <StarRatings
+                        rating={r}
+                        starRatedColor="#ffb829"
+                        numberOfStars={5}
+                        name='rating'
+                        starDimension='22px'
+                        />
         </label>
       </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          name="ratings"
-          id="check8"
-          value="4"
-        />
-        <label className="form-check-label" for="check8">
-          <span className="star-rating">★ ★ ★ ★ ☆</span>
-        </label>
-      </div>
+        ))}
+      
+      
     </div>
   )
 }
