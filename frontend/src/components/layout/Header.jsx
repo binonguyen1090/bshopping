@@ -52,11 +52,11 @@ const Header = () => {
               <span>{user.name}</span>
             </button>
             <div className="dropdown-menu w-100" aria-labelledby="dropDownMenuButton">
-              <Link className="dropdown-item" href="/admin/dashboard"> Dashboard </Link>
+              <Link className="dropdown-item" to="/admin/dashboard"> Dashboard </Link>
 
-              <Link className="dropdown-item" href="/me/orders"> Orders </Link>
+              <Link className="dropdown-item" to="/me/orders"> Orders </Link>
 
-              <Link className="dropdown-item" href="/me/profile"> Profile </Link>
+              <Link className="dropdown-item" to="/me/profile"> Profile </Link>
 
               <Link className="dropdown-item text-danger" to="/" onClick={logoutHandler}> Logout </Link>
             </div>
