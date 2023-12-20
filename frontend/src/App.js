@@ -7,6 +7,7 @@ import './App.css'
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home /> } />
             <Route path="/product/:id" element={<ProductDetails /> } />
             <Route path="/login" element={<Login /> } />
+            <Route path="/register" element={<Register /> } />
 
           </Routes>
         </div>
