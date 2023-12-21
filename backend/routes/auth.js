@@ -3,7 +3,7 @@
 import express from 'express'
 import {  getUserProfile,forgotPassword, loginUser, logoutUser, 
     registerUser, resetPassword, updatePassword,updateProfile,
-    getAllUsers,getUserDetails,updateUserProfile,deleteUserProfile} from '../controllers/authController.js';
+    getAllUsers,getUserDetails,updateUserProfile,deleteUserProfile, uploadAvatar} from '../controllers/authController.js';
 import { authorizeRoles, isAuthenticatedUser } from '../middlewares/auth.js';
 
 const router = express.Router();
@@ -20,6 +20,7 @@ router.route("/password/update").put(isAuthenticatedUser,updatePassword);
 
 router.route("/profile").get( isAuthenticatedUser,getUserProfile);
 router.route("/profile/update").put( isAuthenticatedUser,updateProfile);
+router.route("/me/upload_avatar").put( isAuthenticatedUser,uploadAvatar);
 
 
 router.route("/admin/users").get( isAuthenticatedUser, authorizeRoles("admin") ,getAllUsers);

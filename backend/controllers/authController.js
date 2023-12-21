@@ -5,8 +5,8 @@ import sendToken from "../utils/sendToken.js"
 import sendEmail from "../utils/sendEmail.js"
 import { getResetPasswordTemplate } from "../utils/emailTemplates.js"
 import crypto from "crypto"
-
-
+import { upload_file } from "../utils/cloudinary.js"
+import { delete_file } from "../utils/cloudinary.js"
 export const registerUser = catchAsyncErrors(async (req,res,next) => {
     
     const {name, email, password} = req.body
@@ -154,22 +154,24 @@ export const updatePassword = catchAsyncErrors(async(req,res,next) =>{
         success: true
       });
 })
+// Upload user avatar   =>  /api/v1/me/upload_avatar
+export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
+  const avatarResponse = await upload_file(req.body.avatar, "bshopping/avatars");
 
-// export const updateProfile = catchAsyncErrors(async(req,res,next) =>{
-    
+  // Remove previous avatar
+  if (req?.user?.avatar?.url) {
+    await delete_file(req?.user?.avatar?.public_id);
+  }
 
+  const user = await User.findByIdAndUpdate(req?.user?._id, {
+    avatar: avatarResponse,
+  });
 
-//     const newUserData = {
-//         name: req.body.name,
-//         email: req.body.email,
-//     }
+  res.status(200).json({
+    user,
+  });
+});
 
-//     const user = await User.findByIdAndUpdate(req.user._id, newUserData, {new:true})
-
-//     res.status(200).json({
-//         user
-//       });
-// })
 
 export const updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
