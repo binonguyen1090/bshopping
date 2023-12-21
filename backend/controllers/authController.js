@@ -155,22 +155,36 @@ export const updatePassword = catchAsyncErrors(async(req,res,next) =>{
       });
 })
 
-export const updateProfile = catchAsyncErrors(async(req,res,next) =>{
+// export const updateProfile = catchAsyncErrors(async(req,res,next) =>{
     
 
 
-    const newUserData = {
-        name: req.body.name,
-        email: req.body.email,
-    }
-    const user = await User.findByIdAndUpdate(req.user._id, newUserData, {new:true})
+//     const newUserData = {
+//         name: req.body.name,
+//         email: req.body.email,
+//     }
 
-    res.status(200).json({
-        user
-      });
-})
+//     const user = await User.findByIdAndUpdate(req.user._id, newUserData, {new:true})
 
+//     res.status(200).json({
+//         user
+//       });
+// })
 
+export const updateProfile = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+
+  const user = await User.findByIdAndUpdate(req.user._id, newUserData, {
+    new: true,
+  });
+
+  res.status(200).json({
+    user,
+  });
+});
 export const getAllUsers = catchAsyncErrors(async(req,res,next) =>{
     
     const users = await User.find()
