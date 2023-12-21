@@ -21,7 +21,7 @@ dotenv.config({ path: "backend/config/config.env" })
 
 connectDatabase();
 
-app.use(express.json())
+app.use(express.json({limit: "10mb"}))
 app.use(cookieParser())
 // import routes
 import productRoutes from './routes/products.js'
