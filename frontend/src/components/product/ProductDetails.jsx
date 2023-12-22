@@ -4,8 +4,11 @@ import { toast } from "react-hot-toast";
 import Loader from "../layout/Loader";
 import StarRatings from "react-star-ratings";
 import { useGetProductDetailsQuery  } from "../../redux/api/productsApi";
+import { setCartItem } from "../../redux/features/cartSlice";
+import { useDispatch } from "react-redux";
 const ProductDetails = () => {
     const params = useParams()
+    const dispatch = useDispatch()
     const {data, isLoading, error, isError} = useGetProductDetailsQuery (params?.id)
     const product = data?.product
 
@@ -27,7 +30,6 @@ const ProductDetails = () => {
         }
       },[error])
 
-    if (isLoading) return <Loader />
 
 
     const increaseQty = () => {
@@ -47,6 +49,24 @@ const ProductDetails = () => {
       const qty = count.valueAsNumber - 1;
       setQuantity(qty);
     };
+
+    const setItemToCart = () => {
+      const cartItem = {
+        product: product?._id,
+        name: product?.name,
+        price: product?.price,
+        image: product?.images[0]?.url,
+        stock: product?.stock,
+        quantity,
+      };
+  
+      dispatch(setCartItem(cartItem));
+      toast.success("Item added to Cart");
+    };
+
+    if (isLoading) return <Loader />
+
+  
   return (
     <div className="row d-flex justify-content-around">
       <div className="col-12 col-lg-5 img-fluid" id="product_image">
@@ -116,7 +136,8 @@ const ProductDetails = () => {
           type="button"
           id="cart_btn"
           className="btn btn-primary d-inline ms-4"
-          disabled=""
+          disabled={product.stock <= 0}
+          onClick={setItemToCart}
         >
           Add to Cart
         </button>
