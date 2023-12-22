@@ -7,7 +7,6 @@ const Search = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log(keyword)
 
         if(keyword?.trim()){
             navigate(`/?keyword=${keyword}`)

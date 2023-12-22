@@ -9,6 +9,8 @@ const ProductDetails = () => {
     const {data, isLoading, error, isError} = useGetProductDetailsQuery (params?.id)
     const product = data?.product
 
+    const [quantity, setQuantity] = useState(1)
+
     const [activeImg, setActiveImg] = useState("");
 
     useEffect(() => {
@@ -27,6 +29,24 @@ const ProductDetails = () => {
 
     if (isLoading) return <Loader />
 
+
+    const increaseQty = () => {
+      const count = document.querySelector(".count");
+  
+      if (count.valueAsNumber >= product?.stock) return;
+  
+      const qty = count.valueAsNumber + 1;
+      setQuantity(qty);
+    };
+  
+    const decreaseQty = () => {
+      const count = document.querySelector(".count");
+  
+      if (count.valueAsNumber <= 1) return;
+  
+      const qty = count.valueAsNumber - 1;
+      setQuantity(qty);
+    };
   return (
     <div className="row d-flex justify-content-around">
       <div className="col-12 col-lg-5 img-fluid" id="product_image">
@@ -83,14 +103,14 @@ const ProductDetails = () => {
 
         <p id="product_price">${product?.price}</p>
         <div className="stockCounter d-inline">
-          <span className="btn btn-danger minus">-</span>
+          <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
           <input
             type="number"
             className="form-control count d-inline"
-            value="1"
+            value={quantity}
             readonly
           />
-          <span className="btn btn-primary plus">+</span>
+          <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
         </div>
         <button
           type="button"

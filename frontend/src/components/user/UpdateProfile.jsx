@@ -39,7 +39,6 @@ const UpdateProfile = () => {
       name,
       email,
     };
-    console.log(userData)
     updateProfile(userData);
   };
 
