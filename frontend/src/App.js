@@ -16,6 +16,8 @@ import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
 import Cart from "./components/cart/Cart";
+import Shipping from "./components/cart/Shipping";
+import ConfirmOrder from "./components/cart/ConfirmOrder";
 function App() {
   return (
     <Router>
@@ -38,7 +40,9 @@ function App() {
             <Route path="/me/update_profile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute> } />
             <Route path="/me/upload_avatar" element={<ProtectedRoute><UploadAvatar /></ProtectedRoute> } />
             <Route path="/me/update_password" element={<ProtectedRoute><UpdatePassword /></ProtectedRoute> } />
-          
+            <Route path="/shipping" element={<ProtectedRoute><Shipping /></ProtectedRoute> } />
+            <Route path="/confirm_order" element={<ProtectedRoute><ConfirmOrder /></ProtectedRoute> } />
+
           </Routes>
         </div>
         <Footer />
