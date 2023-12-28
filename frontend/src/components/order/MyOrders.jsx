@@ -6,7 +6,7 @@ import { MDBDataTable } from "mdbreact";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import { useDispatch } from "react-redux";
-// import { clearCart } from "../../redux/features/cartSlice";
+import { clearCart } from "../../redux/features/cartSlice";
 
 const MyOrders = () => {
   const { data, isLoading, error } = useMyOrdersQuery();
@@ -16,16 +16,17 @@ const MyOrders = () => {
   const navigate = useNavigate();
 
   const orderSuccess = searchParams.get("order_success");
-
+  console.log('============> ' + orderSuccess)
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
 
-    // if (orderSuccess) {
-    //   dispatch(clearCart());
-    //   navigate("/me/orders");
-    // }
+    if (orderSuccess) {
+        
+      dispatch(clearCart());
+      navigate("/me/orders");
+    }
   }, [error, orderSuccess]);
 
   const setOrders = () => {
