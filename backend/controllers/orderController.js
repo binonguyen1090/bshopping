@@ -28,8 +28,7 @@ export const newOrder = catchAsyncErrors(async (req,res) => {
         paymentInfo,
         user:req.user._id
     })
-    console.log('order')
-    console.log(order)
+
 
     res.status(200).json({
         order
@@ -41,7 +40,10 @@ export const newOrder = catchAsyncErrors(async (req,res) => {
 export const getOrderDetail = catchAsyncErrors(async (req,res,next) => {
     
     
-    const order = await Order.findById(req?.params?.id)
+    const order = await Order.findById(req.params.id).populate(
+        "user",
+        "name email"
+      );
     if(!order){
         return next(new ErrorHandler("Order not found", 404))
         // return  res.status(404).json({
