@@ -55,12 +55,12 @@ export const getOrderDetail = catchAsyncErrors(async (req,res,next) => {
 
 export const myOrder = catchAsyncErrors(async (req,res,next) => {
     
-    const order = await Order.find({user: req?.user?._id})
-    if(!order){
+    const orders = await Order.find({user: req?.user?._id})
+    if(!orders){
         return next(new ErrorHandler("Order not found", 404))
     }
     res.status(200).json({
-        order
+        orders
     })
 })
 
