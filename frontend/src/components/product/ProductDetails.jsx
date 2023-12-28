@@ -7,13 +7,14 @@ import { useGetProductDetailsQuery  } from "../../redux/api/productsApi";
 import { setCartItem } from "../../redux/features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NewReview from "../reviews/NewReview";
+import ListReviews from "../reviews/ListReviews";
 const ProductDetails = () => {
     const params = useParams()
     const dispatch = useDispatch()
     const {data, isLoading, error, isError} = useGetProductDetailsQuery (params?.id)
     const product = data?.product
     const { isAuthenticated } = useSelector((state) => state.auth);
-    console.log(isAuthenticated)
+
     const [quantity, setQuantity] = useState(1)
 
     const [activeImg, setActiveImg] = useState("");
@@ -70,6 +71,7 @@ const ProductDetails = () => {
 
   
   return (
+    <>
     <div className="row d-flex justify-content-around">
       <div className="col-12 col-lg-5 img-fluid" id="product_image">
         <div className="p-3">
@@ -174,6 +176,10 @@ const ProductDetails = () => {
         
       </div>
     </div>
+    {product?.reviews?.length > 0 && (
+      <ListReviews reviews={product?.reviews} />
+    )}
+    </>
   );
 };
 

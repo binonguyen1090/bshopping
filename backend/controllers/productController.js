@@ -39,7 +39,7 @@ export const newProduct = catchAsyncErrors(async (req,res) => {
 
 export const getProductDetail = catchAsyncErrors(async (req,res,next) => {
     
-    const product = await Product.findById(req?.params?.id)
+    const product = await Product.findById(req?.params?.id).populate('reviews.user')
     if(!product){
         return next(new ErrorHandler("Product not found", 404))
         // return  res.status(404).json({
@@ -99,10 +99,10 @@ export const createProductReview = catchAsyncErrors(async (req,res) => {
         })
     }
 
-    const isReviewed = product.reviews.find((r) => r.user.toString() == rq.user.id.toString())
+    const isReviewed = product.reviews.find((r) => r.user.toString() == req.user.id.toString())
     if(isReviewed){
         product.reviews.forEach(r=>{
-            if(r.user.toString() == rq.user.id.toString()){
+            if(r.user.toString() == req.user.id.toString()){
                 r.comment = comment
                 r.rating = rating
             }
