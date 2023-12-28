@@ -5,13 +5,15 @@ import Loader from "../layout/Loader";
 import StarRatings from "react-star-ratings";
 import { useGetProductDetailsQuery  } from "../../redux/api/productsApi";
 import { setCartItem } from "../../redux/features/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import NewReview from "../reviews/NewReview";
 const ProductDetails = () => {
     const params = useParams()
     const dispatch = useDispatch()
     const {data, isLoading, error, isError} = useGetProductDetailsQuery (params?.id)
     const product = data?.product
-
+    const { isAuthenticated } = useSelector((state) => state.auth);
+    console.log(isAuthenticated)
     const [quantity, setQuantity] = useState(1)
 
     const [activeImg, setActiveImg] = useState("");
@@ -162,10 +164,14 @@ const ProductDetails = () => {
         <p id="product_seller mb-3">
           Sold by: <strong>{product?.seller}</strong>
         </p>
-
-        <div className="alert alert-danger my-5" type="alert">
+        {isAuthenticated ? (
+            <NewReview productId={product?._id} />
+          ) : (
+            <div className="alert alert-danger my-5" type="alert">
           Login to post your review.
         </div>
+          )}
+        
       </div>
     </div>
   );

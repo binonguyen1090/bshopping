@@ -22,10 +22,22 @@ export const productApi = createApi({
     getProductDetails: builder.query({
       query: (id) => `/products/${id}`,
     }),
-
+    submitReview: builder.mutation({
+      query(body) {
+        return {
+          url: "/reviews",
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Product"],
+    }),
+    // canUserReview: builder.query({
+    //   query: (productId) => `/can_review/?productId=${productId}`,
+    // }),
   }),
 });
 
-export const { useGetProductsQuery , useGetProductDetailsQuery } = productApi;
+export const { useGetProductsQuery , useGetProductDetailsQuery, useSubmitReviewMutation, } = productApi;
 
 
