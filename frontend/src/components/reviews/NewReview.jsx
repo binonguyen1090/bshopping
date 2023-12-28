@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StarRatings from "react-star-ratings";
 import {
-//   useCanUserReviewQuery,
+  useCanUserReviewQuery,
   useSubmitReviewMutation,
 } from "../../redux/api/productsApi";
 import { toast } from "react-hot-toast";
@@ -13,9 +13,8 @@ const NewReview = ({ productId }) => {
   const [submitReview, { isLoading, error, isSuccess }] =
     useSubmitReviewMutation();
 
-//   const { data } = useCanUserReviewQuery(productId);
-//   const canReview = data?.canReview;
-
+  const { data } = useCanUserReviewQuery(productId);
+  const canReview = data?.canReview;
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
@@ -33,7 +32,7 @@ const NewReview = ({ productId }) => {
 
   return (
     <div>
-      {/* {canReview && ( */}
+      {canReview && (
         <button
           id="review_btn"
           type="button"
@@ -43,7 +42,7 @@ const NewReview = ({ productId }) => {
         >
           Submit Your Review
         </button>
-      {/* )} */}
+        )} 
 
       <div class="row mt-2 mb-5">
         <div class="rating w-50">
