@@ -22,7 +22,7 @@ const Header = () => {
       <div className="col-12 col-md-3 ps-5">
         <div className="navbar-brand">
           <a href="/">
-            <img src="/images/logo.ico" alt="ShopIT Logo" style={{height:"100px"}}/>
+            <img src="/images/logo.ico" alt="Bshopping Logo" style={{height:"100px"}}/>
           </a>
         </div>
       </div>
