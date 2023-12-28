@@ -28,6 +28,8 @@ export const newOrder = catchAsyncErrors(async (req,res) => {
         paymentInfo,
         user:req.user._id
     })
+    console.log('order')
+    console.log(order)
 
     res.status(200).json({
         order
