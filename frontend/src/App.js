@@ -1,28 +1,34 @@
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import toast, { Toaster } from 'react-hot-toast';
-import Home from "./components/Home";
+// import Home from "./components/Home";
 import './App.css'
 
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
-import ProductDetails from "./components/product/ProductDetails";
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
-import Profile from "./components/user/Profile";
-import UpdateProfile from "./components/user/UpdateProfile";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UploadAvatar from "./components/user/UploadAvatar";
-import UpdatePassword from "./components/user/UpdatePassword";
-import ForgotPassword from "./components/auth/ForgotPassword";
-import ResetPassword from "./components/auth/ResetPassword";
-import Cart from "./components/cart/Cart";
-import Shipping from "./components/cart/Shipping";
-import ConfirmOrder from "./components/cart/ConfirmOrder";
-import PaymentMethod from "./components/cart/PaymentMethod";
-import MyOrders from "./components/order/MyOrders";
-import OrderDetails from "./components/order/OrderDetails";
-import Invoice from "./components/invoice/Invoice";
+import useUserRoutes from "./components/routes/userRoutes";
+import useAdminRoutes from "./components/routes/adminRoutes";
+
+// import ProductDetails from "./components/product/ProductDetails";
+// import Login from "./components/auth/Login";
+// import Register from "./components/auth/Register";
+// import Profile from "./components/user/Profile";
+// import UpdateProfile from "./components/user/UpdateProfile";
+// import ProtectedRoute from "./components/auth/ProtectedRoute";
+// import UploadAvatar from "./components/user/UploadAvatar";
+// import UpdatePassword from "./components/user/UpdatePassword";
+// import ForgotPassword from "./components/auth/ForgotPassword";
+// import ResetPassword from "./components/auth/ResetPassword";
+// import Cart from "./components/cart/Cart";
+// import Shipping from "./components/cart/Shipping";
+// import ConfirmOrder from "./components/cart/ConfirmOrder";
+// import PaymentMethod from "./components/cart/PaymentMethod";
+// import MyOrders from "./components/order/MyOrders";
+// import OrderDetails from "./components/order/OrderDetails";
+// import Invoice from "./components/invoice/Invoice";
 function App() {
+  const userRoutes = useUserRoutes()
+  const adminRoutes = useAdminRoutes()
+
   return (
     <Router>
       <div className="App">
@@ -30,7 +36,10 @@ function App() {
         <Header />
         <div className="container">
           <Routes>
-            <Route path="/" element={<Home /> } />
+            {userRoutes}
+            {adminRoutes}
+
+            {/* <Route path="/" element={<Home /> } />
             <Route path="/product/:id" element={<ProductDetails /> } />
             <Route path="/login" element={<Login /> } />
             <Route path="/register" element={<Register /> } />
@@ -47,7 +56,7 @@ function App() {
             <Route path="/payment_method" element={<ProtectedRoute><PaymentMethod /></ProtectedRoute> } />
             <Route path="/me/orders" element={ <ProtectedRoute> <MyOrders /> </ProtectedRoute> } />
             <Route path="/me/order/:id" element={ <ProtectedRoute> <OrderDetails /> </ProtectedRoute> } />
-            <Route path="/invoice/order/:id" element={ <ProtectedRoute> <Invoice /> </ProtectedRoute> } />
+            <Route path="/invoice/order/:id" element={ <ProtectedRoute> <Invoice /> </ProtectedRoute> } /> */}
 
           </Routes>
         </div>

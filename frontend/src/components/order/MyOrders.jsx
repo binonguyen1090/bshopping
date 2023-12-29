@@ -16,7 +16,6 @@ const MyOrders = () => {
   const navigate = useNavigate();
 
   const orderSuccess = searchParams.get("order_success");
-  console.log('============> ' + orderSuccess)
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
