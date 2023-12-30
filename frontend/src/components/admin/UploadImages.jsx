@@ -5,7 +5,7 @@ import MetaData from "../layout/MetaData";
 import AdminLayout from "../layout/AdminLayout";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-//   useDeleteProductImageMutation,
+  useDeleteProductImageMutation,
   useGetProductDetailsQuery,
   useUploadProductImagesMutation,
 } from "../../redux/api/productsApi";
@@ -22,10 +22,10 @@ const UploadImages = () => {
   const [uploadProductImages, { isLoading, error, isSuccess }] =
     useUploadProductImagesMutation();
 
-//   const [
-//     deleteProductImage,
-//     { isLoading: isDeleteLoading, error: deleteError },
-//   ] = useDeleteProductImageMutation();
+  const [
+    deleteProductImage,
+    { isLoading: isDeleteLoading, error: deleteError },
+  ] = useDeleteProductImageMutation();
 
   const { data } = useGetProductDetailsQuery(params?.id);
 
@@ -38,16 +38,16 @@ const UploadImages = () => {
       toast.error(error?.data?.message);
     }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
     if (isSuccess) {
       setImagesPreview([]);
       toast.success("Images Uploaded");
       navigate("/admin/products");
     }
-  }, [data, error, isSuccess]);
+  }, [data, error, isSuccess,deleteError]);
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -86,7 +86,7 @@ const UploadImages = () => {
   };
 
   const deleteImage = (imgId) => {
-    // deleteProductImage({ id: params?.id, body: { imgId } });
+    deleteProductImage({ id: params?.id, body: { imgId } });
   };
 
   return (
@@ -170,7 +170,7 @@ const UploadImages = () => {
                             }}
                             className="btn btn-block btn-danger cross-button mt-1 py-0"
                             type="button"
-                            // disabled={isLoading || isDeleteLoading}
+                            disabled={isLoading || isDeleteLoading}
                             onClick={() => deleteImage(img?.public_id)}
                           >
                             <i className="fa fa-trash"></i>
@@ -187,7 +187,7 @@ const UploadImages = () => {
               id="register_button"
               type="submit"
               className="btn w-100 py-2"
-            //   disabled={isLoading || isDeleteLoading}
+              disabled={isLoading || isDeleteLoading}
             >
               {isLoading ? "Uploading..." : "Upload"}
             </button>
