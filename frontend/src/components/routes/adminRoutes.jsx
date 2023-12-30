@@ -14,6 +14,7 @@ import UpdatePassword from "../user/UpdatePassword";
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 import Dashboard from '../admin/Dashboard';
 import ListProducts from '../admin/ListProducts';
+import NewProduct from '../admin/NewProduct';
 
 const adminRoutes = () => {
   return (
@@ -32,6 +33,15 @@ const adminRoutes = () => {
             element={
             <ProtectedRoute admin={true}>
                 <ListProducts />
+            </ProtectedRoute>
+            }
+        />
+
+        <Route
+            path="/admin/product/new"
+            element={
+            <ProtectedRoute admin={true}>
+                <NewProduct />
             </ProtectedRoute>
             }
         />

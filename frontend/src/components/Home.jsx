@@ -29,6 +29,9 @@ const Home = () => {
   ratings != null && (params.ratings = ratings)
 
   const {data,isLoading,error} = useGetProductsQuery(params)
+  console.log('data')
+  console.log(data)
+
   useEffect(()=>{
     if(error){
       toast.error(error?.data?.message)

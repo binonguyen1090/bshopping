@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom'
 import StarRatings from 'react-star-ratings';
 
 const ProductItem = ({product,columnSize}) => {
+  console.log(product.images)
   return (
 
               <div className={`col-sm-12 col-md-6 col-lg-${columnSize} my-3`}>
                 <div className="card p-3 rounded">
                   <img
                     className="card-img-top mx-auto"
-                    src={product.images[0].url}
+                    src={
+                      product?.images[0]
+                        ? product?.images[0]?.url
+                        : "/images/default_product.png"
+                    }
                     alt={product?.name}
                   />
                   <div
