@@ -52,14 +52,34 @@ export const productApi = createApi({
         };
       },
       invalidatesTags: ["AdminProduct"],
-
     }),
 
+    updateProduct: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/products/${id}`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Product", "AdminProducts"],
+    }),
+
+    uploadProductImages: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/products/${id}/upload_images`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Product"],
+    }),
 
   }),
 });
 
 export const { useGetProductsQuery , useGetProductDetailsQuery, useSubmitReviewMutation, useCanUserReviewQuery,
-useGetAdminProductsQuery,useCreateProductMutation } = productApi;
+useGetAdminProductsQuery,useCreateProductMutation, useUpdateProductMutation, useUploadProductImagesMutation } = productApi;
 
 

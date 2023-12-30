@@ -3,7 +3,7 @@
 import express from 'express'
 import { getProducts , newProduct, getProductDetail, 
     updateProduct,deleteProduct,
-    createProductReview,getAllReviews,deleteProductReview, canUserReview, getAdminProducts} from '../controllers/productController.js';
+    createProductReview,getAllReviews,deleteProductReview, canUserReview, getAdminProducts, uploadProductImages} from '../controllers/productController.js';
 import { isAuthenticatedUser, authorizeRoles } from '../middlewares/auth.js';
 const router = express.Router();
 
@@ -18,6 +18,7 @@ router.route("/products/:id").get(getProductDetail);
 
 router.route("/admin/products/:id").put(isAuthenticatedUser, authorizeRoles("admin"),updateProduct);
 router.route("/admin/products/:id").delete(isAuthenticatedUser, authorizeRoles("admin"),deleteProduct);
+router.route("/admin/products/:id/upload_images").put(isAuthenticatedUser, authorizeRoles("admin"),uploadProductImages);
 
 
 router.route("/reviews").put(isAuthenticatedUser,createProductReview);
