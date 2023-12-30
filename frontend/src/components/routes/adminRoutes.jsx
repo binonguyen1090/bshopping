@@ -13,18 +13,28 @@ import UpdatePassword from "../user/UpdatePassword";
 
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 import Dashboard from '../admin/Dashboard';
+import ListProducts from '../admin/ListProducts';
 
 const adminRoutes = () => {
   return (
     <>
         <Route
-        path="/admin/dashboard"
-        element={
-          <ProtectedRoute admin={true}>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
+            path="/admin/dashboard"
+            element={
+            <ProtectedRoute admin={true}>
+                <Dashboard />
+            </ProtectedRoute>
+            }
+        />
+
+        <Route
+            path="/admin/products"
+            element={
+            <ProtectedRoute admin={true}>
+                <ListProducts />
+            </ProtectedRoute>
+            }
+        />
 
     </>
   )
