@@ -88,6 +88,11 @@ export const deleteProduct = catchAsyncErrors(async (req,res) => {
         })
     }
 
+        // Deleting image associated with product
+    for (let i = 0; i < product?.images?.length; i++) {
+        await delete_file(product?.images[i].public_id);
+    }
+
     await product.deleteOne()
     res.status(200).json({
         message: "Product is deleted",
