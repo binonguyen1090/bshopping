@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const orderApi = createApi({
   reducerPath: "orderApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api/v1" }),
+  tagTypes: ["Order", "AdminOrders"],
   endpoints: (builder) => ({
     createNewOrder: builder.mutation({
       query(body) {
@@ -30,7 +31,14 @@ export const orderApi = createApi({
         };
       },
     }),
+
+
+    getAdminOrders: builder.query({
+      query: () => `/admin/orders`,
+      providesTags: ["AdminOrders"],
+    }),
+
   }),
 });
 
-export const { useCreateNewOrderMutation, useStripeCheckoutSessionMutation, useMyOrdersQuery, useOrderDetailsQuery } = orderApi;
+export const { useCreateNewOrderMutation, useStripeCheckoutSessionMutation, useMyOrdersQuery, useOrderDetailsQuery,useGetAdminOrdersQuery } = orderApi;
