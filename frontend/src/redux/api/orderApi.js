@@ -51,9 +51,20 @@ export const orderApi = createApi({
     }),
 
 
+    deleteOrder: builder.mutation({
+      query(id) {
+        return {
+          url: `/admin/orders/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["AdminOrders"],
+    }),
+
+
   }),
 });
 
 export const { useCreateNewOrderMutation, useStripeCheckoutSessionMutation,
   useMyOrdersQuery,useOrderDetailsQuery,useGetAdminOrdersQuery,
-useUpdateOrderMutation } = orderApi;
+useUpdateOrderMutation , useDeleteOrderMutation} = orderApi;
