@@ -19,6 +19,7 @@ export const orderApi = createApi({
     }),
     orderDetails: builder.query({
       query: (id) => `/orders/${id}`,
+      providesTags: ["Order"],
     }),
 
 
@@ -38,7 +39,21 @@ export const orderApi = createApi({
       providesTags: ["AdminOrders"],
     }),
 
+    updateOrder: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/orders/${id}`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Order"],
+    }),
+
+
   }),
 });
 
-export const { useCreateNewOrderMutation, useStripeCheckoutSessionMutation, useMyOrdersQuery, useOrderDetailsQuery,useGetAdminOrdersQuery } = orderApi;
+export const { useCreateNewOrderMutation, useStripeCheckoutSessionMutation,
+  useMyOrdersQuery,useOrderDetailsQuery,useGetAdminOrdersQuery,
+useUpdateOrderMutation } = orderApi;
