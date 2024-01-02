@@ -3,11 +3,7 @@ import SideMenu from "./SideMenu";
 
 const AdminLayout = ({ children }) => {
   const menuItems = [
-    {
-      name: "Dashboard",
-      url: "/admin/dashboard",
-      icon: "fas fa-tachometer-alt",
-    },
+
     {
       name: "New Product",
       url: "/admin/product/new",
