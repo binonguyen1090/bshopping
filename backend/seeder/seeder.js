@@ -10,7 +10,9 @@ const seedProducts = async () => {
 
     try {
 
-        await mongoose.connect("mongodb://127.0.0.1:27017/bshopping")
+        await mongoose.connect(
+            "mongodb+srv://binonguyen1090:123Huynguyen@bshopping.ay3s9g4.mongodb.net/bshopping?retryWrites=true&w=majority"
+            )
         await Product.deleteMany()
         console.log('Products are deleted')
 

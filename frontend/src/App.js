@@ -7,6 +7,7 @@ import './App.css'
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 import useUserRoutes from "./components/routes/userRoutes";
 import useAdminRoutes from "./components/routes/adminRoutes";
+import NotFound from "./components/layout/NotFound";
 
 // import ProductDetails from "./components/product/ProductDetails";
 // import Login from "./components/auth/Login";
@@ -38,7 +39,7 @@ function App() {
           <Routes>
             {userRoutes}
             {adminRoutes}
-
+            <Route path="*" element={<NotFound />} />
             {/* <Route path="/" element={<Home /> } />
             <Route path="/product/:id" element={<ProductDetails /> } />
             <Route path="/login" element={<Login /> } />
