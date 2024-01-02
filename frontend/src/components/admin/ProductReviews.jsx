@@ -6,7 +6,7 @@ import MetaData from "../layout/MetaData";
 
 import AdminLayout from "../layout/AdminLayout";
 import {
-//   useDeleteReviewMutation,
+  useDeleteReviewMutation,
   useLazyGetProductReviewsQuery,
 } from "../../redux/api/productsApi";
 const ProductReviews = () => {
@@ -15,33 +15,33 @@ const ProductReviews = () => {
   const [getProductReviews, { data, isLoading, error }] =
     useLazyGetProductReviewsQuery();
 
-//   const [
-//     deleteReview,
-//     { error: deleteError, isLoading: isDeleteLoading, isSuccess },
-//   ] = useDeleteReviewMutation();
+  const [
+    deleteReview,
+    { error: deleteError, isLoading: isDeleteLoading, isSuccess },
+  ] = useDeleteReviewMutation();
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
-    // if (isSuccess) {
-    //   toast.success("Review Deleted");
-    // }
-  }, [error]);
+    if (isSuccess) {
+      toast.success("Review Deleted");
+    }
+  }, [error,isSuccess,deleteError]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     getProductReviews(productId);
   };
 
-//   const deleteReviewHandler = (id) => {
-//     deleteReview({ productId, id });
-//   };
+  const deleteReviewHandler = (id) => {
+    deleteReview({ productId, id });
+  };
 
   const setReviews = () => {
     const reviews = {
@@ -85,8 +85,8 @@ const ProductReviews = () => {
           <>
             <button
               className="btn btn-outline-danger ms-2"
-            //   onClick={() => deleteReviewHandler(review?._id)}
-            //   disabled={isDeleteLoading}
+              onClick={() => deleteReviewHandler(review?._id)}
+              disabled={isDeleteLoading}
             >
               <i className="fa fa-trash"></i>
             </button>

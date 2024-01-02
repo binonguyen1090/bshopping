@@ -104,12 +104,22 @@ export const productApi = createApi({
       providesTags: ["Reviews"],
     }),
 
+    deleteReview: builder.mutation({
+      query({ productId, id }) {
+        return {
+          url: `/admin/reviews?productId=${productId}&id=${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Reviews"],
+    }),
+
   }),
 });
 
 export const { useGetProductsQuery , useGetProductDetailsQuery, useSubmitReviewMutation, useCanUserReviewQuery,
 useGetAdminProductsQuery,useCreateProductMutation, useUpdateProductMutation, useUploadProductImagesMutation,
 useDeleteProductImageMutation, useDeleteProductMutation,
-useLazyGetProductReviewsQuery } = productApi;
+useLazyGetProductReviewsQuery, useDeleteReviewMutation } = productApi;
 
 
