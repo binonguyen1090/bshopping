@@ -5,13 +5,13 @@ const ListReviews = ({ reviews }) => {
 
     return (
     <div>
-      <div class="reviews w-75">
+      <div className="reviews w-75">
         <h3>Other's Reviews:</h3>
         <hr />
         {reviews?.map((review) => (
-          <div key={review?._id} class="review-card my-3">
-            <div class="row">
-              <div class="col-1">
+          <div key={review?._id} className="review-card my-3">
+            <div className="row">
+              <div className="col-1">
                 <img
                   src={
                     review?.user?.avatar
@@ -21,10 +21,10 @@ const ListReviews = ({ reviews }) => {
                   alt="User Name"
                   width="50"
                   height="50"
-                  class="rounded-circle"
+                  className="rounded-circle"
                 />
               </div>
-              <div class="col-11">
+              <div className="col-11">
                 <StarRatings
                   rating={review?.rating}
                   starRatedColor="#ffb829"
@@ -33,8 +33,8 @@ const ListReviews = ({ reviews }) => {
                   starDimension="24px"
                   starSpacing="1px"
                 />
-                <p class="review_user">by {review.user?.name}</p>
-                <p class="review_comment">{review?.comment}</p>
+                <p className="review_user">by {review.user?.name}</p>
+                <p className="review_comment">{review?.comment}</p>
               </div>
             </div>
             <hr />
